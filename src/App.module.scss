@@ -1,0 +1,11 @@
+@import './assets/reset.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import './assets/consts.scss';
+* {
+  color: $black;
+  font-family: 'Roboto', sans-serif;
+}
+.containerPage {
+  margin: 0 auto;
+  max-width: 2880px;
+}

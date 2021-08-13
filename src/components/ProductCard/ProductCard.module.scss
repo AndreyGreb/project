@@ -1,0 +1,64 @@
+@import '../../assets/consts.scss';
+
+.productCard {
+  display: flex;
+
+  &__slider {
+    width: 2160px;
+
+    &-item {
+      width: 1080px;
+      height: 1625px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    margin: 80px 0 0 120px;
+    &-brand {
+      margin-bottom: 10px;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+    }
+
+    &-category {
+      font-size: 20px;
+    }
+
+    &-price {
+      margin: 40px 0 60px 0;
+      font-size: 24px;
+    }
+
+    &-size {
+      &-title {
+        color: $gray;
+        font-size: 24px;
+      }
+
+      &-container {
+        display: flex;
+        margin: 40px 0 0 15px;
+      }
+    }
+
+    &-btn {
+      display: flex;
+      margin: 80px 0;
+
+      &Bag {
+        width: 380px;
+        height: 100px;
+      }
+
+      &Like {
+        width: 100px;
+        height: 100px;
+        svg {
+          width: 36px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../../assets/consts.scss';
+
+.sizeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  font-size: 24px;
+  background: transparent;
+  border: none;
+}
+
+.sizeItem:not(:last-child) {
+  margin-right: 40px;
+}
+
+.sizeItem::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 2px;
+  margin-top: 10px;
+  background: $black;
+  transition: all 0.3s;
+}
+
+.active::after {
+  width: 40px !important;
+}
+
+.sizeItem:hover {
+  cursor: pointer;
+}

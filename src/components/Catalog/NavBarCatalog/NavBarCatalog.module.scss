@@ -1,0 +1,19 @@
+.navBar {
+    margin: 75px 190px;
+
+    &__title {
+        font-size: 32px;
+        letter-spacing: 0.04em;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        margin-top: 60px;
+
+        a {
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+    }
+}

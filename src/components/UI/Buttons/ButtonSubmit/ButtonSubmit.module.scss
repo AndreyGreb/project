@@ -1,0 +1,18 @@
+@import '../../../../assets/consts.scss';
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: $black;
+  color: $white;
+  font-size: 32px;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

@@ -1,0 +1,54 @@
+@import '../../assets/consts.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  max-width: 2640px;
+  padding: 0 120px;
+  height: 112px;
+  font-size: 24px;
+  font-weight: 400;
+
+  &__left {
+    flex: 1;
+
+    a:not(:last-child) {
+      margin-right: 80px;
+    }
+  }
+
+  &__logo {
+    flex: 1;
+    text-align: center;
+    font-size: 70px;
+    font-weight: 700;
+  }
+
+  &__right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    a:not(:last-child) {
+      margin-right: 80px;
+    }
+
+    svg {
+      fill: $black;
+    }
+  }
+}
+
+.white {
+    a {
+      color: $white;
+    }
+
+    span {
+      color: $white;
+    }
+  
+    svg {
+      fill: $white;
+    }
+  }

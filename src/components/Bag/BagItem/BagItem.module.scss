@@ -1,0 +1,39 @@
+@import '../../../assets/consts.scss';
+
+.bag__product-item {
+    display: flex;
+    position: relative;
+    padding: 60px 0 170px 0;
+    border-bottom: 2px solid $light-gray;
+
+    a {
+        height: 460px;
+
+        img {
+        width: 320px;
+        margin-bottom: 90px;
+    }
+    }
+    
+
+    &Info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 40px;
+
+        &-brand {
+            margin-bottom: 10px;
+            font-size: 32px;
+            letter-spacing: 0.04em;
+        }
+
+        &-category {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        &-price {
+            font-size: 24px;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+.slick-slider {
+    position: relative;
+    
+    .slick-arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 5;
+        width: 60px;
+        height: 106px;
+        margin-top: -53px;
+        font-size: 0;
+        border: 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+       
+    }
+
+    .slick-prev {
+        left: 0;
+        background: url('../../assets/images/icons/leftArrow.svg') 0 0 / 100% no-repeat;
+        margin-left: 20px;
+    }
+
+    .slick-next {
+        right: 0;
+        background: url('../../assets/images/icons/rightArrow.svg') 0 0 / 100% no-repeat;
+        margin-right: 20px;
+    }
+
+
+}
+
