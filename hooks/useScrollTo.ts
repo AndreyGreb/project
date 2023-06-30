@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-const useScrollTo = <T extends Element>() => {
-	const ref = useRef<T>(null)
+const useScrollTo = () => {
+	const ref = useRef<HTMLDivElement | null>(null)
 	const [scrollTo, setScrollTo] = useState(false)
 
 	useEffect(() => {
