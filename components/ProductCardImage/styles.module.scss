@@ -1,7 +1,10 @@
 
+.productCardImage {
+	padding-bottom: 12px;
+}
+
 .layout {
 	position: relative;
-	overflow: hidden;
 	padding: 24px;
 	border-radius: 24px;
 }
@@ -13,9 +16,7 @@
 	scroll-snap-type: x mandatory;
 
 	&::-webkit-scrollbar {
-		width: 0;
-		height: 0;
-		pointer-events: none;
+		display: none;
 	}
 }
 
@@ -23,6 +24,7 @@
 	position: relative;
 	min-width: 100%;
 	scroll-snap-align: start;
+	scroll-snap-stop: always;
 
 	&:before {
 		content: '';
@@ -39,5 +41,24 @@
 	bottom: 0;
 	left: 0;
 	background-color: rgba(0,0,21, 0.03);
+	border-radius: 24px;
 	pointer-events: none;
+}
+
+.snippet {
+	display: flex;
+	justify-content: center;
+	margin-top: 8px;
+	column-gap: 4px;
+}
+
+.snippetItem {
+	width: 12px;
+	height: 4px;
+	background-color: rgba(0,0,21,0.12);
+	border-radius: 4px;
+
+	&--active {
+		background-color: #000015;
+	}
 }
