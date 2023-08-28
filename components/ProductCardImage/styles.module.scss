@@ -9,17 +9,6 @@
 	border-radius: 24px;
 }
 
-.imageList {
-	display: flex;
-	overflow-x: auto;
-	scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
-}
-
 .image {
 	position: relative;
 	min-width: 100%;
@@ -40,6 +29,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 1;
 	background-color: rgba(0,0,21, 0.03);
 	border-radius: 24px;
 	pointer-events: none;
