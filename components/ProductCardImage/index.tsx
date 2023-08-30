@@ -1,5 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useMemo, useState } from 'react'
+import classNames from 'classnames'
+
+import useDetectedDevice from '@/hooks/useDetectedDevice'
 
 import Image from '../ui/Image'
 
@@ -8,39 +11,55 @@ import { ProductCardImageProps } from './types'
 import styles from './styles.module.scss'
 import 'swiper/css'
 
-const maxImages = 10
+const MAX_COUNT_IMAGES = 10
 
 const ProductCardImage = ({ imageList }: ProductCardImageProps) => {
+
+	const { } = useDetectedDevice()
+
+	const pictureList = useMemo(() => imageList.map((image, index) => ({ ...image, id: index })), [imageList])
 
 	const [activeImageId, setActiveImageId] = useState(0)
 
 	return (
-		<div className={styles['layout']}>
-			<Swiper
+		<>
+			<div className={styles['layout']}>
+				<Swiper
 
-			>
-				{
-					imageList.map((image, index) => index < maxImages &&
-						<SwiperSlide
 
-							key={index}
-						>
-							<div
-								className={styles['image']}
+					loop
+				>
+					{
+						pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
+							<SwiperSlide
+								key={picture.id}
 							>
-								<Image
-									src={image.src}
-									alt={image.alt}
-									fill
-									style={{ objectFit: 'contain' }}
-								/>
-							</div>
-						</SwiperSlide>
+								<div className={styles['image']}>
+									<Image
+										src={picture.src}
+										alt={picture.alt}
+										fill
+										style={{ objectFit: 'contain' }}
+									/>
+								</div>
+							</SwiperSlide>
+						)
+					}
+				</Swiper>
+				<div className={styles['background']} />
+			</div >
+
+			<div className={styles['snippet']}>
+				{
+					pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
+						<div
+							className={classNames(styles['snippetItem'], activeImageId === picture.id && styles['snippetItem--active'])}
+							key={picture.id}
+						/>
 					)
 				}
-			</Swiper>
-			<div className={styles['background']} />
-		</div>
+			</div>
+		</>
 	)
 }
 

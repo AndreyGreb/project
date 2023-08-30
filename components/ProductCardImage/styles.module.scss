@@ -1,8 +1,4 @@
 
-.productCardImage {
-	padding-bottom: 12px;
-}
-
 .layout {
 	position: relative;
 	padding: 24px;
@@ -38,7 +34,8 @@
 .snippet {
 	display: flex;
 	justify-content: center;
-	margin-top: 8px;
+	padding-top: 8px;
+	padding-bottom: 4px;
 	column-gap: 4px;
 }
 
