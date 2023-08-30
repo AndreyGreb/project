@@ -25,15 +25,12 @@ const ProductCardImage = ({ imageList }: ProductCardImageProps) => {
 		<>
 			<div className={styles['layout']}>
 				<Swiper
-
-
+					onSlideChange={(swipe) => setActiveImageId(swipe.realIndex)}
 					loop
 				>
 					{
 						pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
-							<SwiperSlide
-								key={picture.id}
-							>
+							<SwiperSlide key={picture.id}>
 								<div className={styles['image']}>
 									<Image
 										src={picture.src}
