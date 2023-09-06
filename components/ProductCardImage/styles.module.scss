@@ -8,8 +8,6 @@
 .image {
 	position: relative;
 	min-width: 100%;
-	scroll-snap-align: start;
-	scroll-snap-stop: always;
 
 	&:before {
 		content: '';
@@ -48,4 +46,17 @@
 	&--active {
 		background-color: #000015;
 	}
+}
+
+.mask {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+}
+
+.maskItem {
+	flex: 1;
 }

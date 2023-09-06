@@ -18,11 +18,14 @@ const ProductCardImage = ({ imageList }: ProductCardImageProps) => {
 	const imagesRef = useRef<Array<HTMLDivElement | null>>([])
 	const layoutRef = useRef<HTMLDivElement | null>(null)
 
-	const { } = useDetectedDevice()
+	const { isTablet } = useDetectedDevice()
 
 	const pictureList = useMemo(() => imageList.map((image, index) => ({ ...image, id: String(index) })), [imageList])
 
-	const [activeImageId, setActiveImageId] = useState('0')
+	const initialActiveImageId = '0'
+	const [activeImageId, setActiveImageId] = useState(initialActiveImageId)
+
+	const activeImage = useMemo(() => pictureList.find(picture => picture.id === activeImageId), [activeImageId])
 
 	const callbackObserver: IntersectionObserverCallback = (entries) => {
 		entries.forEach((entry) => entry.isIntersecting && setActiveImageId(entry.target.id))
@@ -30,13 +33,17 @@ const ProductCardImage = ({ imageList }: ProductCardImageProps) => {
 
 	useEffect(() => {
 
-		const observer = new IntersectionObserver(callbackObserver, {
-			root: layoutRef.current,
-			threshold: 1
-		})
+		setActiveImageId(initialActiveImageId)
 
-		imagesRef.current.forEach((image) => image && observer.observe(image))
-	}, [])
+		if (isTablet) {
+			const observer = new IntersectionObserver(callbackObserver, {
+				root: layoutRef.current,
+				threshold: 1
+			})
+
+			imagesRef.current.forEach((image) => image && observer.observe(image))
+		}
+	}, [isTablet])
 
 	return (
 		<>
@@ -44,28 +51,59 @@ const ProductCardImage = ({ imageList }: ProductCardImageProps) => {
 				className={styles['layout']}
 				ref={layoutRef}
 			>
-				<Swiper loop>
-					{
-						pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
-							<SwiperSlide key={picture.id}>
-								<div
-									className={styles['image']}
-									ref={el => imagesRef.current[index] = el}
-									id={picture.id}
-								>
-									<Image
-										src={picture.src}
-										alt={picture.alt}
-										fill
-										style={{ objectFit: 'contain' }}
-									/>
-								</div>
-							</SwiperSlide>
-						)
-					}
-				</Swiper>
+				{
+					!isTablet &&
+					<div className={styles['image']}>
+						<Image
+							src={activeImage?.src || ''}
+							alt={activeImage?.alt || ''}
+							fill
+							style={{ objectFit: 'contain' }}
+						/>
+						{
+							pictureList.length > 1 &&
+							<div
+								className={styles['mask']}
+								onMouseLeave={() => setActiveImageId(initialActiveImageId)}
+							>
+								{
+									pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
+										<div
+											className={styles['maskItem']}
+											onMouseEnter={() => setActiveImageId(picture.id)}
+											key={picture.id}
+										/>
+									)
+								}
+							</div>
+						}
+					</div>
+				}
+				{
+					isTablet &&
+					<Swiper loop>
+						{
+							pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
+								<SwiperSlide key={picture.id}>
+									<div
+										className={styles['image']}
+										ref={el => imagesRef.current[index] = el}
+										id={picture.id}
+									>
+										<Image
+											src={picture.src}
+											alt={picture.alt}
+											fill
+											style={{ objectFit: 'contain' }}
+										/>
+									</div>
+								</SwiperSlide>
+							)
+						}
+					</Swiper>
+				}
 				<div className={styles['background']} />
-			</div >
+			</div>
 
 			<div className={styles['snippet']}>
 				{
