@@ -1,5 +1,5 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useMemo, useState } from 'react'
 import classNames from 'classnames'
 
 import useDetectedDevice from '@/hooks/useDetectedDevice'
@@ -15,23 +15,44 @@ const MAX_COUNT_IMAGES = 10
 
 const ProductCardImage = ({ imageList }: ProductCardImageProps) => {
 
+	const imagesRef = useRef<Array<HTMLDivElement | null>>([])
+	const layoutRef = useRef<HTMLDivElement | null>(null)
+
 	const { } = useDetectedDevice()
 
-	const pictureList = useMemo(() => imageList.map((image, index) => ({ ...image, id: index })), [imageList])
+	const pictureList = useMemo(() => imageList.map((image, index) => ({ ...image, id: String(index) })), [imageList])
 
-	const [activeImageId, setActiveImageId] = useState(0)
+	const [activeImageId, setActiveImageId] = useState('0')
+
+	const callbackObserver: IntersectionObserverCallback = (entries) => {
+		entries.forEach((entry) => entry.isIntersecting && setActiveImageId(entry.target.id))
+	}
+
+	useEffect(() => {
+
+		const observer = new IntersectionObserver(callbackObserver, {
+			root: layoutRef.current,
+			threshold: 1
+		})
+
+		imagesRef.current.forEach((image) => image && observer.observe(image))
+	}, [])
 
 	return (
 		<>
-			<div className={styles['layout']}>
-				<Swiper
-					onSlideChange={(swipe) => setActiveImageId(swipe.realIndex)}
-					loop
-				>
+			<div
+				className={styles['layout']}
+				ref={layoutRef}
+			>
+				<Swiper loop>
 					{
 						pictureList.map((picture, index) => index < MAX_COUNT_IMAGES &&
 							<SwiperSlide key={picture.id}>
-								<div className={styles['image']}>
+								<div
+									className={styles['image']}
+									ref={el => imagesRef.current[index] = el}
+									id={picture.id}
+								>
 									<Image
 										src={picture.src}
 										alt={picture.alt}
